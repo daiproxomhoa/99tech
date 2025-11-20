@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer theme {
+  body {
+    @apply flex flex-col items-center min-h-screen justify-center bg-gray-950 text-white;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}

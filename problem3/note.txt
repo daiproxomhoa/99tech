@@ -1,0 +1,6 @@
+-Since getPriority and usdValue are called many times, we should add a field "priority" for initial mapping so it doesn't have to be recalled, making the code cleaner. formattedBalances should initially to reformat the format balances 
+-Use currency as the key for rendering because balances isn't static data
+-getPriority should be declared outside the component to avoid re-creation on every render, and it should not contain any state.
+-The blockchain parameters in the getPriority function should be of type string instead of any.
+-`className={classes.row}` should be declared in the WalletRow component.
+-You should use BoxProps directly instead of extending from BoxProps.
