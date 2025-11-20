@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { ArrowIcon, SearchIcon } from "../assets";
 import Dialog from "../components/Dialog";
@@ -14,14 +14,15 @@ interface Props {
   listCurrency?: CurrencyModel[];
 }
 const CurrencySelectDialog = (props: Props) => {
-  const { value, onChange, open, onClose, listCurrency } = props;
+  const { value, onChange, open, onClose, listCurrency = [] } = props;
   const intl = useIntl();
   const [search, setSearch] = useState("");
 
-  const filteredCurrency =
-    listCurrency?.filter((item) =>
+  const filteredCurrency = useMemo(() => {
+    return listCurrency?.filter((item) =>
       item.currency.toLowerCase().includes(search.toLowerCase())
-    ) ?? [];
+    );
+  }, [listCurrency, search]);
 
   useEffect(() => {
     if (!open) {

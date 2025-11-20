@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import uniqBy from "lodash/uniqBy";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { ArrowDownIcon } from "../assets";
 import InprogressImage from "../components/InprogressImage";
@@ -20,7 +20,10 @@ function SwapContainer() {
   });
 
   const [toCurrency, setToCurrency] = useState<CurrencyModel | null>(null);
-  const canSwap = fromCurrency.value && fromCurrency.currency && toCurrency;
+  const canSwap = useMemo(
+    () => fromCurrency.value && fromCurrency.currency && toCurrency,
+    [fromCurrency.currency, fromCurrency.value, toCurrency]
+  );
   const [toCurrencyValue, setToCurrencyValue] = useState("");
   const [loading, setLoading] = useState(false);
 
