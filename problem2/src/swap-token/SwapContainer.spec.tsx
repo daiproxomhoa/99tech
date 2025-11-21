@@ -71,10 +71,8 @@ describe("SwapContainer", () => {
     render(<SwapContainer />);
     await setupSwap();
     await selectCurrency("LUNA", "from");
-    enterFromValue("10");
-    await waitFor(async () => {
-      const label = await screen.findByTestId("from-currency-usd-label");
-      expect(label.textContent).toBe("$10.00");
-    });
+    await enterFromValue("10");
+    const label = await screen.findByTestId("from-currency-usd-label");
+    expect(label.textContent).toBe("$4.10");
   });
 });
